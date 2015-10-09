@@ -1,0 +1,172 @@
+html, body, form, table, tbody, tr, td, p {
+	border: 0;
+	color: #000;
+	font: 14px/18px Verdana,Arial,Helvetica,sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+	background-color: #46535e;	
+}
+body {
+	height: 100%;
+    overflow-x: hidden;
+    position: relative;	
+
+}
+
+a {
+	outline:none !important;
+	color: #000;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+h1 {
+	font-family: 'PT Sans', sans-serif;
+    font-size: 27px;
+    line-height: 29px;
+	padding: 3px 10px 7px;
+    text-align: left;
+}
+
+h2 {
+	font-family: 'PT Sans', sans-serif;
+    font-size: 23px;
+    line-height: 25px;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+h3 {
+	font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    line-height: 23px;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+p{
+	font-family: 'PT Sans', sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+	color: #292425;
+}
+
+#body_wrapper {
+    background-color: #fff;
+    height: 100%;
+    margin-left: 23%;
+    position: fixed;
+    width: 100%;
+}
+
+#header{
+    background-color: #fff;
+    color: gray;
+    display: block;
+    font-size: 25px;
+    height: 50px;
+    margin: 0 0 0 23%;
+    padding: 0;
+    text-align: center;
+	width: 77%;
+	border-bottom: 1px solid #000;	
+	padding: 10px 0;
+}
+
+
+#page_wrapper{
+	min-height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+
+#left-sidebar {
+    width: 23%;	
+	height: 100%;	
+	float:left;
+    overflow: hidden;
+}
+
+#left-sidebar li {
+	color: #fff;
+}
+
+#left-sidebar a {
+	outline:none !important;
+	color: #fff;
+}
+
+#main{
+	padding: 25px 25px 71px 25px;
+	width: 77%;
+	float: left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+#blog_wrapper {
+    overflow: hidden;
+}
+
+
+.blog {
+    border: 1px solid;
+    border-radius: 5px;
+    float: left;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+.descr_none {
+	display: none;
+}
+
+#footer{
+    background-color: #fff;
+    color: gray;
+    display: block;
+    font-size: 25px;
+    height: 50px;
+    margin: -71px 0 0 0;
+    padding: 0;
+    text-align: center;
+	width: 77%;
+	position: relative;
+	margin-left: 23%;
+	border-top: 1px solid #000;	
+	padding: 10px 0;	
+}
+
+#loader_wrapper {
+    background-color: #fff;
+    height: 100%;
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 90;
+	display: none;
+}
+
+#loader {
+    background-image: url("../img/loader.gif");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}

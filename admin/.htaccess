@@ -1,0 +1,17 @@
+AddDefaultCharset utf-8
+DirectoryIndex  index.php 
+Options All -Indexes
+RewriteEngine On
+RewriteBase  /api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
+
+
+#AuthType Basic
+#AuthUserFile G:/home/webden/www/admin/.htpasswd
+#AuthName "LOGIN/PASSWORD" 
+#ErrorDocument 401 'Error to admin page'
+#ErrorDocument 500 /api/index.php
+#require valid-user
+

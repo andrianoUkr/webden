@@ -1,0 +1,58 @@
+<!--  TEMPLATE HTML -->		
+		<script type="text/template" id="listMenu">
+		<!-- _.each(this, function(value, key, list){})-->		
+			<a href=".#<%= alias %>"><%= link%></a>
+			<% var fun = function(sub){
+				if(sub.length > 0){%>
+					<ul>
+					<%_.each(sub, function(item){%>
+					<li><a href=".#<%=item.alias %>"><%= item.link%></a></li>
+					<%});%>
+					</ul>
+				<%}
+			};fun(sub);
+			%>
+		</script>	
+		
+		<script type="text/template" id="pageId">
+		<h1> -= <%= name %> =- </h1>
+		<div id="full_content">
+			<%= img %>img
+			<%= description %>
+		</div>
+		<hr/><hr/>	
+		</script>	
+		<script type="text/template" id="blogId">
+		<h1> -= <%= name %> =- </h1>
+		<div id="full_content">
+			<%= img %>img
+			<%= description %>	
+			<%= price %>				
+			<a href=".#page/<%= parent_content %>" class="click_back">назад</a>
+			<hr/>
+			<p><%= date_content %></p>	
+		</div>		
+		</script>			
+		
+		<script type="text/template" id="blogWrapper">
+			<div class="blog">
+			<h1><%= name %></h1>
+			<div id="tizer">
+				<h2>КОРОТКО:</h2>
+				<p><%= tizer %></p>
+				<a href=".#page/<%= id %>" class="click_tizer">подробнее</a>
+				<hr/>
+				<p><%= date_content %></p>				
+			</div>
+			</div>
+		</script>
+		<script type="text/template" id="blogList">
+		<h1> -= <%= name %> =- </h1>
+		<div id="full_content">
+			<%= img %>img
+			<%= description %>		
+			<div id="blog_wrapper"> <%= compiled_blog %> </div>
+		</div>		
+		</script>		
+		
+<!--  TEMPLATE HTML -->
