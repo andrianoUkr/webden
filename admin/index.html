@@ -3,58 +3,27 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-		<title>ADMIN PAGE</title>	
+		<title>ADMIN PAGE!!!</title>	
 		<link rel="stylesheet" href="styles/style.css" type="text/css" media="all"/>		
         <script src="js/lib/jquery-1.11.2.js"></script>
+        <script src="js/lib/jquery.base64.js"></script>
+		<script src="js/lib/jquery.cookie.js"></script>
         <script src="js/lib/underscore.js"></script>
         <script src="js/lib/backbone.js"></script> 
 		<script src="js/lib/backbone.localStorage.js"></script>
 		<script src="js/main.js"></script>
-		<script src="js/index.js"></script>		
-		<script src="js/list.js"></script>	
-		<script src="js/page.js"></script>		
+		<script src="js/index.js"></script>
+		<script src="js/auth.js"></script>
+		<script src="js/logout.js"></script>		
 		<script src="js/route.js"></script>	    
-<script type="text/javascript">
-function logout() {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-          xmlhttp = new XMLHttpRequest();
-    }
-    // code for IE
-    else if (window.ActiveXObject) {
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    if (window.ActiveXObject) {
-      // IE clear HTTP Authentication
-      document.execCommand("ClearAuthenticationCache");
-      window.location.href='/where/to/redirect';
-    } else {
-        xmlhttp.open("GET", '/path/that/will/return/200/OK', true, "logout", "logout");
-        xmlhttp.send("");
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4) {window.location.href='/where/to/redirect';}
-        }
-
-
-    }
-
-
-    return false;
-}
-</script>
 	</head>
     <body>
 	<div id="body_wrapper"></div>
 		<div id="page_wrapper">
-			<div id="header" >HEADER</div>
+			<div id="header" >HEADER1</div>
 			<div id="left-sidebar">
 				<div id="admin_menu">
-					<h3><a href="#">ADMIN PANEL</a></h3>
-					<a href="#" onclick="logout();">Log out</a>
-					<ul>
-						<li><a href="./#menu">Изменить Меню</a></li>
-						<li><a href="./#content">Изменить Содержание</a></li>
-					</ul>				
+
 				</div>
 				<div id="menu"></div>
 			</div>			

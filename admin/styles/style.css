@@ -87,16 +87,22 @@ p{
 	width: 100%;
 }
 
-#left-sidebar {
+#left-sidebar  {
     width: 23%;	
 	height: 100%;	
 	float:left;
     overflow: hidden;
+	color: #fff;
+}
+
+#left-sidebar p  {
+	color: #fff;
 }
 
 #admin_menu {
 	margin: 0 30px;	
 	color: #fff;
+	min-height: 100px;	
 }
 
 #left-sidebar ul {
@@ -183,7 +189,7 @@ padding: 0 20px;
 }
 
 
-#content {
+#auth_content {
     border: medium none;
     min-height: 0;
     padding: 20px;
@@ -191,14 +197,14 @@ padding: 0 20px;
 }
 
 
-#content label {
+#auth_content label {
     display: block;
     float: left;
     margin: 0 15px 0 0;
     width: 15%;
 }
 
-#content .select {
+#auth_content .select {
     display: block;
     float: left;
     margin: 0 15px 0 0;

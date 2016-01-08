@@ -1,6 +1,9 @@
 webden.Page = (function(W, $){	
 
 	Model = Backbone.Model.extend({
+		initialize: function() {			
+			// console.log(this);
+		},	
 		defaults: {
 			id: '1',
 			link: 'home',
@@ -19,8 +22,8 @@ webden.Page = (function(W, $){
 		initialize: function() {		
 			// this.model.on('request', function(model, data, opt){
 				// alert('data');
-			// }, this);
-			
+			// }, this);		
+			// console.log(this);
 			this.model.on('sync', function(model, data, opt){
 				if(data.success  == 0) {
 					webden.Vent.trigger('vent:error', 'error page: ' + model.get('id'));
@@ -96,9 +99,25 @@ webden.Page = (function(W, $){
 		}
 	});	
 	
+	function Init(section, subsection, subsubsection){
+		var section = section || '';
+		var subsection = subsection || '';			
+		var subsubsection = subsubsection || '';
+		if(section){
+			var idPage = section;
+			var urlPage = '/api/main/index/page/alias/';
+			if(section == 'page' && subsection){
+				idPage = subsection;
+				urlPage = '/api/main/index/page/id/';
+			};
+			var pageId = new Model({id:idPage});
+			pageId.urlRoot = urlPage;
+			new View({model: pageId});
+		} 		
+	}
+	
 	return{
-		Model:Model,
-		View:View
+		Init:Init
 	};
 })(window, jQuery); 
 

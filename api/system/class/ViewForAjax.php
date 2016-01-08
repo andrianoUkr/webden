@@ -8,10 +8,8 @@ class ViewForAjax
 	{}
 
 
-	public function switchFormat($array, $format='json')
-	{
-		switch ($format) 
-		{
+	public function switchFormat($array, $format='json') {
+		switch ($format) {
 			case 'json':
 				$this->formatJson($array);
 				break;
@@ -30,17 +28,14 @@ class ViewForAjax
 		
 	}
 	
-	public function formatJson ($array)
-	{
+	public function formatJson ($array) {
 		header('Content-type: application/json; charset=utf-8');
 		echo json_encode($array);
 	}
 	
-	public function formatXml($array)
-	{
+	public function formatXml($array) {
 		$this->resultXML.= '<?xml version="1.0" encoding="utf-8"?><root>';	
-		foreach ($array as $row)
-		{
+		foreach ($array as $row) {
 			$this->resultXML.='<car>';
 			foreach($row as $key=>$value)
 			{
@@ -54,21 +49,17 @@ class ViewForAjax
 		echo $this->resultXML;	
 	}
 
-	public function formatHtml($array)
-	{
+	public function formatHtml($array) {
 		header('Content-type: text/html; charset=utf-8');
 		echo '<html><head><title>AUTOSHOP</title></head><body><pre>';
 		print_r($array);		
 		echo '</pre></body></html>';
 	}
 	
-	public function formatTxt($array)
-	{
+	public function formatTxt($array) {
 		header('Content-type: text/html; charset=utf-8');
 		echo '<pre>';
 		print_r($array);		
 		echo '</pre>';	
 	}
-
-
 }

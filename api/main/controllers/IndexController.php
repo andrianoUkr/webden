@@ -18,40 +18,45 @@ class IndexController implements IController {
 	protected function makeObj() {
 		$this->data=new ClearData();
 		$this->model=new IndexModel();
-		$this->viewForAjax=new ViewForAjax();
-		$this->auth=new Auth();		
+		$this->viewForAjax=new ViewForAjax();	
 	}
 	
 	/* Page by default */
-	public function indexAction () {	
+	public function getIndexAction () {	
 		echo "index page!";
 	}
 	
 	/* get list all book */
 	public function getListMenuAction() {	
-		$result=$this->model->getListMenu($this->params['status']);
-		if($result){
-			$arr_list = $result;
-			foreach($result as $key=>$value){
-				if($value['parent_id']> 0 ){
-					$id_par = $value['parent_id'];
-					foreach($arr_list as $ind=>$val){
-						if($val['id'] == $id_par){
-							$arr_list[$ind]['sub'][] = $value;
-							unset($arr_list[$key]);
-							break;
-						}
-					}			
+		if($this->params['status']){
+			$result=$this->model->getListMenu($this->params['status']);
+			if($result){
+				$arr_list = $result;
+				foreach($result as $key=>$value){
+					if($value['parent_id']> 0 ){
+						$id_par = $value['parent_id'];
+						foreach($arr_list as $ind=>$val){
+							if($val['id'] == $id_par){
+								$arr_list[$ind]['sub'][] = $value;
+								unset($arr_list[$key]);
+								break;
+							}
+						}			
+					}
+					else{
+						$arr_list[$key]['sub'] = '';
+					}
 				}
-				else{
-					$arr_list[$key]['sub'] = '';
-				}
+				$result=array_values($arr_list);
+			} else {
+					$result = array();
+					$result['success']= 0;
+					$result['msg']= 'not fields';
 			}
-			$result=array_values($arr_list);
 		} else {
-				$result = array();
-				$result['success']= 0;
-				$result['msg']= 'not fields';
+			$result = array();
+			$result['success']= 0;
+			$result['msg']= 'not params';		
 		}
 		return $this->viewForAjax->switchFormat($result	, $this->format);			
 	}	
@@ -73,19 +78,4 @@ class IndexController implements IController {
 			return $this->viewForAjax->switchFormat($result, $this->format);				
 		}
 	}		
-	
-	public function getAuthAction() {
-		print('<pre>');
-		print_r( ADMIN_HASH);
-		print('<pre>');		
-	}	
-	
-	public function postAuthAction() {
-		if($this->auth->checklogin()){
-			$msg = array('success'=> 1, 'msg'=> 'all very good');
-		} else {
-			$msg = array('success'=> 0, 'msg'=> 'OPPSS');
-		}
-		return $this->viewForAjax->switchFormat($msg, $this->format);	
-	}
 }

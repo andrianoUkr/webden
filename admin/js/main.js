@@ -20,7 +20,14 @@ webden = (function(W, $){
 		}
 	});
 	
-	
+	/* CHECK INFO USER */
+	function infoCustom(status){
+		var status = status || true;
+		if(status == false){
+			return undefined;
+		}
+		return $.parseJSON($.cookie('infoCustom')) || '';
+	}
 	
 	/*  LOADING*/
 	function loadStart(){
@@ -35,6 +42,7 @@ webden = (function(W, $){
 	return{		
 		Router:Router,
 		Vent  : Vent,
+		infoCustom: infoCustom,
 		loadStart: loadStart,
 		loadStop: loadStop
 	};

@@ -1,67 +1,71 @@
-webden.Index = (function(W, $){	
-
-	Model = Backbone.Model.extend({
-		defaults: {
-			id: '1',
-			link: 'home',
-			parent_id: '0',
-			id_content: '1',
-			public_info: '1',
-			alias: 'homee'
-		}
-	});
-
+webden.Index = (function(W, $){
+	var viewShow = '';
 	/* VIEWS */	
-/* View for model */
-	View = Backbone.View.extend({
+	ViewUserRoom = Backbone.View.extend({
 		tagName: 'div',
+		template: '#userRoom',
 		initialize: function() {
-			
-			this.start();			
+			this.start();
+			console.log(this);
 		},	
 		render: function (){
-			this.template = '#authForm';
-			this.$el.html($(this.template).html());
-			var div = this.$el;	
-			// $('#auth').submit(function(){
-			// alert('Форма auth отправлена на сервер.');
-			// return false;
-			// });
-			$('#main').html(this.el);			
+			var compiled = _.template($(this.template).html(), webden.infoCustom());
+			this.$el.html(compiled);		
+		
+			$('#main').html('');
+			$('#admin_menu').html(this.el);
 			return this;
-			
-						
 		},
 		events: {
-			"submit #auth"	:	"auth",
+			'click #remove-all': 'closeAll'
 		},
 		start: function (){
 			this.render();
-		},
-		auth: function(e) {
-			e.preventDefault();
-			var login = $("#auth [name='login']").val();
-			var password = $("#auth [name='password']").val();			
-			var auth = $.base64.encode(login + ':' + password);
-			$.ajax({
-				beforeSend : function (data) {
-					data.setRequestHeader('Auth', auth);
-				},				
-				url: '/api/main/index/Auth',
-				type: 'POST',
-				cache: false,
-				success: function(){
-					console.log('Load was performed.');
-				}
-			});
 		}
 	});	
 	
+	function checkAuth(){
+		return $.ajax({	
+			beforeSend: function(data, opt){
+				webden.loadStart();
+			},
+			complete: function(data, opt){
+				webden.loadStop();
+			},
+			url: '/api/main/admin/checkAuth',
+			cache: false,
+			success: function(data){
+				if(data.success == 1 && $.cookie('infoCustom')){
+					// webden.infoCustom = $.parseJSON($.cookie('infoCustom'));
+					return true;				
+				} else {
+					webden.routing.navigate('#auth', {trigger: true});
+				}
+			}
+		});		
+	};	
+	
+	function render(){
+		if(webden.infoCustom()){
+			if(_.result(viewShow, 'render')){
+				viewShow.render();
+			} else {
+				viewShow = new ViewUserRoom();				
+			}	
+			return true;
+		}
+		return false;
+	}
+	/* Init the current object */
+	function Init(){
+		if(render() == false){
+			$.when(checkAuth()).done(function(){
+				render();
+			}.bind(this));		
+		}
+	};		
+	
 	return{
-		Model:Model,
-		View:View
+		Init:Init			
 	};
 })(window, jQuery); 
-
-
-

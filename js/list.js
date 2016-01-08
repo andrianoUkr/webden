@@ -1,6 +1,10 @@
 webden.ListMenu = (function(W, $){	
-
+	var viewShow = '';
+	
 	Model = Backbone.Model.extend({
+		initialize: function() {			
+			// console.log(this);
+		},
 		defaults: {
 			id: '1',
 			link: 'test',
@@ -13,6 +17,9 @@ webden.ListMenu = (function(W, $){
 	});
 
 	Collections = Backbone.Collection.extend({
+		initialize: function() {			
+			// console.log(this);
+		},	
 		model: Model,
 		url : '/api/main/index/listMenu/status/public'
 	});
@@ -24,6 +31,9 @@ webden.ListMenu = (function(W, $){
 	ViewOne = Backbone.View.extend({
 		tagName: 'li',
 		template: '#listMenu',
+		initialize: function() {			
+			// console.log(this);
+		},		
 		render: function (){
 			var compiled = _.template($(this.template).html(), this.model.toJSON());
 			this.$el.html(compiled);				
@@ -31,14 +41,13 @@ webden.ListMenu = (function(W, $){
 		}		
 	});	
 
-	
-
 /* View for collections */	
 
 	Views = Backbone.View.extend({
 		tagName: 'ul',
 		initialize: function() {			
 			this.render();
+			// console.log(this);
 		},			
 		render: function (){			
 			this.collection.each( function(value){
@@ -51,9 +60,17 @@ webden.ListMenu = (function(W, $){
 		}
 	});
 	
+	function Init(){
+		if(!viewShow){
+			var listMenuCollections = new Collections();				
+			listMenuCollections.fetch({cache:false}).done(function(){
+				viewShow = new Views({collection: listMenuCollections});
+			})
+		}
+	};		
+	
 	return{
-		Collections:Collections,
-		Views:Views
+		Init: Init
 	};
 })(window, jQuery); 
 

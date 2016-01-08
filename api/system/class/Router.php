@@ -19,6 +19,7 @@ class Router
 
 	private function __construct()
 	{	
+		$session=Session::getInstance(); //session start
 		$request=$_SERVER['REQUEST_URI']; //request url
 	
 	/* Parse URL according to the number of folders */
@@ -36,48 +37,33 @@ class Router
 
 		$splits = explode('/',trim($request,'/'));
 		$num=COUNT_DIR; $i=0;
-		while($i<$num)
-		{
+		while($i<$num) {
 			array_shift($splits);
 			$i++;
 		}
 		
 		/* Choice  Controller */
-		if (!empty($splits[0]))
-		{
+		if (!empty($splits[0])) {
 			$this->_controller=ucFirst($splits[0]).'Controller';
 		}
-		else
-		{
+		else {
 			$this->_controller='IndexController';
 		}		
 		
 		/* Choice action for Controller */
-		if (!empty($splits[1]))
-		{
-			if ($_SERVER['REQUEST_METHOD']== "GET") 
-			{
+		if (!empty($splits[1])) {
+			if ($_SERVER['REQUEST_METHOD']== "GET") {
 				$this->_action='get'.ucFirst($splits[1]).'Action';
-			}
-			elseif ($_SERVER['REQUEST_METHOD']== "POST") 
-			{
+			} elseif ($_SERVER['REQUEST_METHOD']== "POST") {
 				$this->_action='post'.ucFirst($splits[1]).'Action';
-			}
-			elseif ($_SERVER['REQUEST_METHOD']== "PUT") 
-			{
+			} elseif ($_SERVER['REQUEST_METHOD']== "PUT") {
 				$this->_action='put'.ucFirst($splits[1]).'Action';
-			}	
-			elseif ($_SERVER['REQUEST_METHOD']== "DELETE") 
-			{
+			} elseif ($_SERVER['REQUEST_METHOD']== "DELETE") {
 				$this->_action='delete'.ucFirst($splits[1]).'Action';
-			}				
-			else
-			{
+			} else {
 				$this->_action='get'.ucFirst($splits[1]).'Action';
 			}	
-		}
-		else
-		{
+		} else {
 			$this->_action='indexAction';
 		}
 		

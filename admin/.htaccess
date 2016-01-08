@@ -1,11 +1,11 @@
 AddDefaultCharset utf-8
-DirectoryIndex  index.php 
+DirectoryIndex  index.html 
 Options All -Indexes
 RewriteEngine On
 RewriteBase  /api/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ index.php
+RewriteRule ^.*$ index.html
 
 
 #AuthType Basic
